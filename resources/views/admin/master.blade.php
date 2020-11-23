@@ -64,7 +64,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Product:</h6>
             <a class="collapse-item" href="buttons.html">Permintaan</a>
-            <a class="collapse-item" href="{{ route('produk') }}">Belanja</a>
+            <a class="collapse-item" href="cards.html">Belanja</a>
           </div>
         </div>
       </li>
@@ -93,24 +93,30 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-folder"></i>
           <span>User</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">User Screens:</h6>
-            <a class="collapse-item" href="{{ route('datapetani') }}">Petani</a>
-            <a class="collapse-item" href="{{ route('datacustomer') }}">Customer</a>
+            <a class="collapse-item" href="{{ route('login') }}">Petani</a>
+            <a class="collapse-item" href="{{ route('register') }}">Customer</a>
           </div>
         </div>
       </li>
 
+      <!-- Nav Item - Charts -->
+      <li class="nav-item">
+        <a class="nav-link" href="charts.html">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Charts</span></a>
+      </li>
+
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('artikel') }}">
+        <a class="nav-link" href="tables.html">
           <i class="fas fa-fw fa-table"></i>
           <span>Artikel</span></a>
       </li>

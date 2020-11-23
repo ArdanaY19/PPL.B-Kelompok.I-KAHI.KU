@@ -29,4 +29,35 @@ class HomeController extends Controller
     {
         return view('profile');
     }
+    public function edit($id)
+    {
+        $users = \app\user::findorfail($id);
+        return view('edit', compact('users'));
+    }
+    public function update(Request $request, $id)
+    {
+        $users = \app\user::findorfail($id);
+        $users->update($request->all());
+        return redirect('profile')->with('sukses', 'data berhasil diubah');
+    }
+    public function produk()
+    {
+        return view('produk');
+    }
+    public function datapetani()
+    {
+        return view('datapetani');
+    }
+    public function datacustomer()
+    {
+        return view('datacustomer');
+    }
+    public function artikel()
+    {
+        return view('artikel');
+    }
+    public function showartikel()
+    {
+        return view('showartikel');
+    }
 }
