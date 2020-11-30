@@ -15,15 +15,15 @@ class CreatePetaniTable extends Migration
     {
         Schema::create('petani', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
-            $table->binary('foto')->nullable();
-            $table->string('name');
-            $table->string('nohp')->nullable();
-            $table->date('tanggallahir')->nullable();
-            $table->string('alamat')->nullable();
+            $table->biginteger('user_id');
+            $table->string('nama');
+            $table->string('no_hp');
+            $table->string('alamat');
+            $table->date('tanggal_lahir');
+            $table->string('foto')->nullable();
             $table->text('deskripsi')->nullable();
+            $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

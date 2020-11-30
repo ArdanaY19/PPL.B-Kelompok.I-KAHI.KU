@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'role', 'nama_depan', 'nama_belakang', 'tanggal_lahir', 'no_hp', 'alamat', 'email', 'password', 
+        'username', 'email', 'password',  'role', 'active_token'
     ];
 
     /**
@@ -36,4 +36,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function petani()
+    {
+        return $this->hasOne('App\petani');
+    }
+
+    public function customer()
+    {
+        return $this->hasOne('App\customer');
+    }
+    
+    public function transaksi()
+    {
+        return $this->hasMany('App\Transaksi','user_id','id');
+    }
 }

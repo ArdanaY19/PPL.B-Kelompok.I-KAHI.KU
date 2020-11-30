@@ -18,10 +18,20 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('/', 'PageController@home');
+Route::get('/registercustomer', 'PageController@registercustomer');
+Route::get('/registerpetani', 'PageController@registerpetani')->name('register');
+Route::post('/postregistercustomer', 'PageController@postregistercustomer');
+Route::post('/postregisterpetani', 'PageController@postregisterpetani');
+
+Route::get('login', 'AuthController@login')->name('login');
+Route::post('/postlogin', 'AuthController@postlogin');
+Route::get('/logout', 'AuthController@logout');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'HomeController@profile')->name('profile');
-Route::get('/logout', 'C_login@KlikLogout');
+// Route::get('/logout', 'C_login@KlikLogout');
 Route::get('/edit/{id}', 'HomeController@edit')->name('edit');
 Route::post('/update/{id}', 'HomeController@update')->name('update');
 Route::get('/produk', 'HomeController@produk')->name('produk');
@@ -29,3 +39,31 @@ Route::get('/datapetani', 'HomeController@datapetani')->name('datapetani');
 Route::get('/datacustomer', 'HomeController@datacustomer')->name('datacustomer');
 Route::get('/artikel', 'HomeController@artikel')->name('artikel');
 Route::get('/showartikel', 'HomeController@showartikel')->name('showartikel');
+
+Route::group(['middleware' => ['auth', 'CheckRole:admin']], function(){
+    Route::get('/home', 'AuthController@setviewhomeadmin');
+});
+
+Route::group(['middleware' => ['auth', 'CheckRole:petani']], function(){
+    Route::get('/petani/dashboard', 'AuthController@setviewhomepetani');
+    Route::get('/petani/{id}/profile', 'PetaniController@profile');
+    Route::get('/petani/{id}/edit', 'PetaniController@editprofile');
+    Route::post('/petani/{id}/update', 'PetaniController@updateprofile');
+    Route::get('/petani/produk', 'PetaniProdukController@index');
+});
+
+Route::group(['middleware' => ['auth', 'CheckRole:customer']], function(){
+    Route::get('/customer/index', 'AuthController@setviewhomecustomer');
+    Route::get('/customer/{id}/profile', 'CustomerController@profile');
+    Route::get('/customer/{id}/edit', 'CustomerController@editprofile');
+    Route::post('/customer/{id}/update', 'CustomerController@updateprofile');
+    Route::get('/customer/produk', 'ProdukController@index');
+    Route::get('/customer/detailproduk/{id}', 'ProdukController@detail');
+    Route::post('/customer/detailproduk/{id}', 'ProdukController@produk');
+    Route::get('/customer/check_out', 'ProdukController@check_out');
+    Route::delete('/customer/check_out/{id}', 'ProdukController@delete');
+    Route::get('/customer/konfirmasi_check_out', 'ProdukController@konfirmasi');
+    Route::get('/customer/history', 'ProdukController@history');
+    Route::get('/customer/history/{id}', 'ProdukController@historyDetail');
+    });
+  
