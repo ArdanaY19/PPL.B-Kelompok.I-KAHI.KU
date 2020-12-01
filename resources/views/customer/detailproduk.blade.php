@@ -23,7 +23,7 @@
                         </div>
                         <div class="col-md-6 mt-5">
                             <h2>{{ $produk->nama_barang }}</h2>
-                            <table class="table">
+                            <table class="table text-justify">
                                 <tbody>
                                     <tr>
                                         <td>Harga</td>

@@ -29,19 +29,25 @@ Route::post('/postlogin', 'AuthController@postlogin');
 Route::get('/logout', 'AuthController@logout');
 
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/profile', 'HomeController@profile')->name('profile');
-// Route::get('/logout', 'C_login@KlikLogout');
-Route::get('/edit/{id}', 'HomeController@edit')->name('edit');
-Route::post('/update/{id}', 'HomeController@update')->name('update');
-Route::get('/produk', 'HomeController@produk')->name('produk');
-Route::get('/datapetani', 'HomeController@datapetani')->name('datapetani');
-Route::get('/datacustomer', 'HomeController@datacustomer')->name('datacustomer');
-Route::get('/artikel', 'HomeController@artikel')->name('artikel');
-Route::get('/showartikel', 'HomeController@showartikel')->name('showartikel');
+// Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/profile', 'HomeController@profile')->name('profile');
+// // Route::get('/logout', 'C_login@KlikLogout');
+// Route::get('/edit/{id}', 'HomeController@edit')->name('edit');
+// Route::post('/update/{id}', 'HomeController@update')->name('update');
+// Route::get('/produk', 'HomeController@produk')->name('produk');
+// Route::get('/datapetani', 'HomeController@datapetani')->name('datapetani');
+// Route::get('/datacustomer', 'HomeController@datacustomer')->name('datacustomer');
+// Route::get('/artikel', 'HomeController@artikel')->name('artikel');
+// Route::get('/showartikel', 'HomeController@showartikel')->name('showartikel');
 
 Route::group(['middleware' => ['auth', 'CheckRole:admin']], function(){
     Route::get('/home', 'AuthController@setviewhomeadmin');
+    Route::get('/admin/datacustomer', 'AdminController@datacustomer');
+    Route::get('/admin/datapetani', 'AdminController@datapetani');
+    Route::get('/admin/dataproduk', 'AdminController@dataproduk');
+    Route::get('/admin/datatransaksi', 'AdminController@datatransaksi');
+    Route::get('/admin/artikel', 'AdminController@artikel');
+    Route::get('/admin/showartikel', 'AdminController@showartikel');
 });
 
 Route::group(['middleware' => ['auth', 'CheckRole:petani']], function(){

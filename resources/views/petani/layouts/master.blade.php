@@ -52,8 +52,8 @@
 
         <nav class="nav-menu d-none d-lg-block">
           <ul>
-            <li class="active"><a href="/petani/dashboard">Home</a></li>
-            <li><a href="/petani/produk">Produk</a></li>
+            <li class="{{ request()->is('petani/dashboard') ? 'active' : '' }}"><a href="/petani/dashboard">Home</a></li>
+            <li class="{{ request()->is('petani/produk') ? 'active' : '' }}"><a href="/petani/produk">Produk</a></li>
             <li><a href="#services">Pembayaran</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
             <li><a href="#team">Team</a></li>
@@ -88,9 +88,7 @@
   <section id="hero" class="d-flex align-items-center">
     <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
       <h1>Selamat Datang di KAHI.KU</h1>
-      <h2>We are team of talanted designers making websites with Bootstrap</h2>
-      <a href="#about" class="btn-get-started scrollto">Get Started</a>
-    </div>
+      <h2>{{auth()->user()->petani->nama}}</h2>
   </section><!-- End Hero -->
    
        <!-- Page Heading -->
@@ -206,6 +204,8 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('../dashboard/js/main.js') }}"></script>
+
+  @include('sweetalert::alert')
   
 </body>
 

@@ -60,7 +60,7 @@ class AuthController extends Controller
     }
 
   //homenya art
-     public function setviewhomecustomer (){
-       return view ('customer.index');
+     public function setviewhomecustomer (){         
+        return view ('customer.index');
     }
 }

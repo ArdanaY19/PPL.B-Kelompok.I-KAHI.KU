@@ -1,4 +1,4 @@
-@extends('petani.layouts.master')
+@extends('layouts.master')
 
 @section('content')
 <div class="container">
@@ -7,7 +7,7 @@
             <h2 class="text-center font-weight-bold">PRODUK</h2>
         </div>
         @foreach($produks as $produk)
-        <div class="col-md-4">
+        <div class="col-md-4 mt-2">
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="{{ url('images') }}/{{ $produk->gambar }}" alt="...">
                 <div class="card-body">
@@ -18,7 +18,6 @@
                         <br>
                         <strong>Deskripsi :</strong> {{ $produk->deskripsi }}
                     </p>
-                    
                 </div>
             </div>
         </div>

@@ -52,12 +52,12 @@
 
         <nav class="nav-menu d-none d-lg-block">
           <ul>
-            <li class="active"><a href="/customer/index">Home</a></li>
-            <li><a href="/customer/produk">Produk</a></li>
-            <li><a href="/customer/history">Riwayat Pemesanan</a></li>
-            <li><a href="#portfolio">Artikel</a></li>
+            <li class="{{ request()->is('customer/index') ? 'active' : '' }}"><a href="/customer/index">Home</a></li>
+            <li class="{{ request()->is('customer/produk') ? 'active' : '' }}"><a href="/customer/produk">Produk</a></li>
+            <li class="{{ request()->is('customer/history') ? 'active' : '' }}"><a href="/customer/history">Riwayat Pemesanan</a></li>
+            <li class="{{ request()->is('#') ? 'active' : '' }}"><a href="#portfolio">Artikel</a></li>
 
-            <li class="nav-item">
+            <li class="nav-item {{ request()->is('customer/check_out') ? 'active' : '' }}">
                 <?php
                     $transaksi_utama = \App\Transaksi::where('user_id', Auth::user()->id)->where('status', 0)->first();
                     if(!empty($transaksi_utama))
@@ -103,8 +103,7 @@
   <section id="hero" class="d-flex align-items-center">
     <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
       <h1>Selamat Datang di KAHI.KU</h1>
-      <h2>We are team of talanted designers making websites with Bootstrap</h2>
-      <a href="#about" class="btn-get-started scrollto">Get Started</a>
+      <h2>{{auth()->user()->customer->nama}}</h2>
     </div>
   </section><!-- End Hero -->
    
