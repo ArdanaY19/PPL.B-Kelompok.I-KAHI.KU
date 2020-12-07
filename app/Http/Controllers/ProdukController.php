@@ -126,6 +126,7 @@ class ProdukController extends Controller
             $produk->update();
         }
 
+        Alert::success('Success', 'Produk Berhasil Di Check Out');
         return redirect('/customer/history');
     }
 

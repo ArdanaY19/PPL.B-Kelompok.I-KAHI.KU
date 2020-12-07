@@ -19,9 +19,9 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <img src="{{ url('images') }}/{{ $produk->gambar }}" class="rounded mx-auto d-block" width="100%" alt="">
+                            <img src="{{ url('gambar') }}/{{ $produk->gambar }}" class="rounded mx-auto d-block" width="100%" alt="">
                         </div>
-                        <div class="col-md-6 mt-5">
+                        <div class="col-md-6 mt-3">
                             <h2>{{ $produk->nama_barang }}</h2>
                             <table class="table text-justify">
                                 <tbody>
@@ -33,7 +33,7 @@
                                     <tr>
                                         <td>Stok</td>
                                         <td>:</td>
-                                        <td>{{ number_format($produk->stok) }}</td>
+                                        <td>{{ number_format($produk->stok) }} kg </td>
                                     </tr>
                                     <tr>
                                         <td>Deskripsi</td>
@@ -41,7 +41,7 @@
                                         <td>{{ $produk->deskripsi }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Jumlah Pesan</td>
+                                        <td>Jumlah Pesan (dalam kg)</td>
                                         <td>:</td>
                                         <td>
                                             <form action="{{ url('/customer/detailproduk') }}/{{ $produk->id }}" method="post">

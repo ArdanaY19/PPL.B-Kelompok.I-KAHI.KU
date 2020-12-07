@@ -55,8 +55,7 @@
             <li class="{{ request()->is('petani/dashboard') ? 'active' : '' }}"><a href="/petani/dashboard">Home</a></li>
             <li class="{{ request()->is('petani/produk') ? 'active' : '' }}"><a href="/petani/produk">Produk</a></li>
             <li><a href="#services">Pembayaran</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#team">Team</a></li>
+            <li><a href="/petani/artikel">Artikel</a></li>
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
@@ -88,7 +87,7 @@
   <section id="hero" class="d-flex align-items-center">
     <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
       <h1>Selamat Datang di KAHI.KU</h1>
-      <h2>{{auth()->user()->petani->nama}}</h2>
+      <h1>{{auth()->user()->petani->nama}}</h1>
   </section><!-- End Hero -->
    
        <!-- Page Heading -->
@@ -96,7 +95,7 @@
 
        <footer id="footer">
 
-<div class="footer-top">
+<div class="footer-top mt-5">
   <div class="container">
     <div class="row">
 

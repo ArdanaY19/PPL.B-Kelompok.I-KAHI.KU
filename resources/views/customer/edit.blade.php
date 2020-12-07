@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="/customer/{{auth()->user()->customer->id}}/update" method="post">
+                            <form action="/customer/{{auth()->user()->customer->id}}/update" method="post" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <input id="nama" type="text" class="form-control" name="nama" placeholder="Nama" value="{{auth()->user()->customer->nama}}">

@@ -1,109 +1,90 @@
-<?php namespace App\Http\Controllers;
-ini_set('date.timezone', 'Asia/Jakarta');
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Artikel;
+use Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ArtikelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-
-        $main = Storage::get('/data.json');
-        $data = json_decode($main, true);
-        rsort($data);
-
-        return view('welcome', compact('data')); 
+        $artikels = Artikel::paginate(30);
+        return view('admin.artikel', compact('artikels'));
     }
 
-   
-    public function create()
+    public function buatartikel()
     {
-
-        return view('form');
+        return view('admin.buatartikel');
     }
 
-    public function __construct ($date='now'){
-        $this->date = new\Datetime($date);
-    }
-
-    public  function date($format = 'l, j F Y H:i:s'){
-        return $this->date->format($format);
-    }
-
-    public function post(Request $request)
+    public function create(Request $request)
     {
-        $main = Storage::get('/data.json');
-        $data = json_decode($main, true);
+        $this->validate($request, [
+            'judul_artikel' => ['required', 'string', 'max:100'],
+            'deskripsi_artikel' => ['required'],
+        ]);
+        //insert ke tabel user
+        $artikel = new \App\Artikel;
+        $artikel->judul_artikel = $request->judul_artikel;
+        $artikel->deskripsi_artikel = $request->deskripsi_artikel;
+        if ($request->hasFile('foto_artikel')) {
+            $request->file('foto_artikel')->move('foto_artikel/', $request->file('foto_artikel')->getClientOriginalName());
+            $artikel->foto_artikel = $request->file('foto_artikel')->getClientOriginalName();
+            $artikel->save();
+        }
+        $artikel->save();
 
-        $idlist = array_column($data, 'id');
-        $auto_increment_id = end($idlist);
-
-        $data[]=array(
-            'id'=>$auto_increment_id+1,
-            'title'=>$request ->title,
-            'author'=>$request ->author,
-            'date'=> date('l, j F Y H:i:s'),
-            'content'=>$request ->content,
-        );
-        $sikop = json_encode($data, JSON_PRETTY_PRINT);
-        $main = Storage::put('/data.json', $sikop);
-        return redirect('/'); //saat masukin data bakal di arahin ke welcome
-
+        Alert::success('Success', 'artikel Berhasil Disimpan');
+        return redirect('/admin/artikel')->with('sukses', 'Data Berhasil Dibuat');
     }
 
-    public function read($id)
+    public function delete($id)
     {
-        $main = Storage::get('/data.json');
-        $data = json_decode($main, true);
-        $read = $data[$id-1];
+        $artikel = artikel::where('id', $id)->first();
 
-        return view('read', compact('read')); 
+        $artikel->delete();
+        
+        Alert::error('Delete', 'artikel Sukses Dihapus');
+        return redirect('/admin/artikel');
     }
 
-    public function edit($id)
+    public function editartikel($id)
     {
-        $main = Storage::get('/data.json');
-        $data = json_decode($main, true);
-        $edit = $data[$id-1];
-
-        return view('edit', compact('edit')); 
-
-
+        $artikels = artikel::findorfail($id);
+        return view('admin.editartikel', compact('artikels'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
-        $main = Storage::get('/data.json');
-        $data = json_decode($main, true);
+        $ubah = artikel::findorfail($id);
+        $awal = $ubah->foto_artikel;
 
-        $data[$id-1]= array(
-            'id'=>$request ->id,
-            'title'=>$request ->title,
-            'author'=>$request ->author,
-            'date'=> date('l, j F Y H:i:s'),
-            'content'=>$request ->content,
-        );
+        $artikels = [
+            'judul_artikel' => $request->judul_artikel,
+            'deskripsi_artikel' => $request->deskripsi_artikel,
+            'foto_artikel' => $awal,
+        ];
 
-        $sikop = json_encode($data, JSON_PRETTY_PRINT);
-        $main = Storage::put('/data.json', $sikop);
-        return redirect('/');
+        $request->foto_artikel->move(public_path().'/foto_artikel', $awal);
+        $ubah->update($artikels);
+
+        Alert::success('Success', 'artikel Berhasil Dirubah');
+        return redirect('/admin/artikel');
     }
-
-    public function destroy($id)
-    {
-        $main = Storage::get('/data.json');
-        $data = json_decode($main, true);
-
-        unset($data[$id-1]);
-        $sikop = json_encode($data, JSON_PRETTY_PRINT);
-        $main = Storage::put('/data.json', $sikop);
-        return redirect('/');
-    }
-   
-    
 }

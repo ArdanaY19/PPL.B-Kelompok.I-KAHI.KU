@@ -16,7 +16,6 @@
                                 <th>Tanggal</th>
                                 <th>Status</th>
                                 <th>Total Harga</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>

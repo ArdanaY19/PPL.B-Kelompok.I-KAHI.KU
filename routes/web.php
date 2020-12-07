@@ -46,8 +46,12 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin']], function(){
     Route::get('/admin/datapetani', 'AdminController@datapetani');
     Route::get('/admin/dataproduk', 'AdminController@dataproduk');
     Route::get('/admin/datatransaksi', 'AdminController@datatransaksi');
-    Route::get('/admin/artikel', 'AdminController@artikel');
-    Route::get('/admin/showartikel', 'AdminController@showartikel');
+    Route::get('/admin/artikel', 'ArtikelController@index');
+    Route::get('/admin/buatartikel', 'ArtikelController@buatartikel');
+    Route::post('/admin/artikel', 'ArtikelController@create');
+    Route::delete('/admin/artikel/{id}', 'ArtikelController@delete');
+    Route::get('/admin/editartikel/{id}', 'ArtikelController@editartikel');
+    Route::post('/admin/artikel/{id}', 'ArtikelController@update');
 });
 
 Route::group(['middleware' => ['auth', 'CheckRole:petani']], function(){
@@ -56,6 +60,13 @@ Route::group(['middleware' => ['auth', 'CheckRole:petani']], function(){
     Route::get('/petani/{id}/edit', 'PetaniController@editprofile');
     Route::post('/petani/{id}/update', 'PetaniController@updateprofile');
     Route::get('/petani/produk', 'PetaniProdukController@index');
+    Route::get('/petani/buatproduk', 'PetaniProdukController@buatproduk');
+    Route::post('/petani/produk', 'PetaniProdukController@create');
+    Route::delete('/petani/produk/{id}', 'PetaniProdukController@delete');
+    Route::get('/petani/editproduk/{id}', 'PetaniProdukController@editproduk');
+    Route::post('/petani/produk/{id}', 'PetaniProdukController@update');
+    Route::get('/petani/artikel', 'PetaniController@artikel');
+    Route::get('/petani/showartikel/{id}', 'PetaniController@show');
 });
 
 Route::group(['middleware' => ['auth', 'CheckRole:customer']], function(){
@@ -71,5 +82,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:customer']], function(){
     Route::get('/customer/konfirmasi_check_out', 'ProdukController@konfirmasi');
     Route::get('/customer/history', 'ProdukController@history');
     Route::get('/customer/history/{id}', 'ProdukController@historyDetail');
+    Route::get('/customer/artikel', 'CustomerController@artikel');
+    Route::get('/customer/showartikel/{id}', 'CustomerController@show');
     });
   

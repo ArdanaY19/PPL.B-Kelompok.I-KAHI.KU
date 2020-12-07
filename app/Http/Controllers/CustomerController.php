@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\Artikel;
 
 class CustomerController extends Controller
 {
@@ -50,5 +51,17 @@ class CustomerController extends Controller
                 ]);
         }
         return redirect(url('/customer/{{auth()->user()->customer->id}}/profile'))->with('success', 'data berhasil diubah');
+    }
+
+    public function artikel()
+    {
+        $artikels = Artikel::paginate(30);
+        return view('customer.artikel', compact('artikels'));
+    }
+
+    public function show($id)
+    {
+        $artikel = Artikel::where('id', $id)->first();
+        return view('customer.showartikel', compact('artikel'));
     }
 }

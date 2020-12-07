@@ -31,7 +31,7 @@
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $transaksi_detail->produk->nama_barang }}</td>
                                 <td>
-                                    <img src="{{ url('images') }}/{{ $transaksi_detail->produk->gambar }}" width="100" alt="...">
+                                    <img src="{{ url('gambar') }}/{{ $transaksi_detail->produk->gambar }}" width="100" height="50" alt="...">
                                 </td>
                                 <td>{{ $transaksi_detail->jumlah }} kg</td>
                                 <td " align="right">Rp. {{ number_format($transaksi_detail->produk->harga) }}</td>

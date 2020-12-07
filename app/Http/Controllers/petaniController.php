@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\Produk;
+use App\Artikel;
 
 class PetaniController extends Controller
 {
@@ -55,5 +57,17 @@ class PetaniController extends Controller
     public function produk()
     {
         return view('petani.produk');
+    }
+
+    public function artikel()
+    {
+        $artikels = Artikel::paginate(30);
+        return view('petani.artikel', compact('artikels'));
+    }
+
+    public function show($id)
+    {
+        $artikel = Artikel::where('id', $id)->first();
+        return view('petani.showartikel', compact('artikel'));
     }
 }
