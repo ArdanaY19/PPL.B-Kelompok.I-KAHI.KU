@@ -20,6 +20,7 @@ class CreateTransaksisTable extends Migration
             $table->string('status');
             $table->integer('kode');
             $table->integer('jumlah_harga');
+            $table->string('bukti_transfer')->nullable();
             $table->timestamps();
         });
     }

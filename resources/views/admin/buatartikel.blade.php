@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="form-group">
-                            <a href="/admin/artikel" class="btn btn-danger">Kembali</a>
+                            <a href="/admin/artikel" class="btn btn-danger">Batal</a>
                             <button type="submit" class="btn btn-primary">Tambah Data</button>
                         </div>
                     </form>

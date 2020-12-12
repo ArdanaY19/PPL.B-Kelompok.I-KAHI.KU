@@ -3,8 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12 mt-2">
-            <a href="{{ url('/customer/produk') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i>Kembali</a>
+        <div class="col-md-12 mt-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url('/customer/index') }}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Riwayat Pemesanan</li>
+                </ol>
+            </nav>
         </div>
         <div class="col-md-12 mt-2">
             <div class="card">
@@ -28,9 +33,11 @@
                                 <td>{{ $transaksi->tanggal }}</td>
                                 <td>
                                     @if($transaksi->status == 1)
-                                    Sudah Melakukan Pemesanan Namun Belum Dibayar
+                                    Belum Dibayar
+                                    @elseif($transaksi->status == 2)
+                                    Sudah Dibayar
                                     @else
-                                    Sudah Melakukan Pemesanan Dan Sudah Dibayar
+                                    Pembayaran Tidak Terverifikasi
                                     @endif
                                 </td>
                                 <td>Rp. {{ number_format($transaksi->jumlah_harga + $transaksi->kode) }}</td>

@@ -3,8 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12 mt-2">
-            <a href="{{ url('/customer/produk') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i>Kembali</a>
+        <div class="col-md-12 mt-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url('/customer/index') }}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                </ol>
+            </nav>
         </div>
         <div class="col-md-12 mt-3">
             <div class="card">

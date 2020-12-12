@@ -9,7 +9,7 @@
                 <div class="card-header"><h3>{{ __('Edit Produk') }}</h3></div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/petani/produk') }}/{{ $produks->id }}" enctype="multipart/form-data" name="form">
+                    <form method="POST" action="{{ url('/petani/produk') }}/{{ $produks->id }}" enctype="multipart/form-data" name="form" onsubmit="return validateForm()">
                         {{ csrf_field() }}
 
                         <div class="form-group">
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group">
-                            <a href="/petani/produk" class="btn btn-danger">Kembali</a>
+                            <a href="/petani/produk" class="btn btn-danger">Batal</a>
                             <button type="submit" class="btn btn-primary">Ubah Data</button>
                         </div>
                     </form>
@@ -49,5 +49,20 @@
     </div>
 </div>
 </body>
+
+<script type="text/javascript">
+    function validateForm() {
+        var a = document.forms["form"]["nama_barang"].value;
+        var b = document.forms["form"]["harga"].value;
+        var c = document.forms["form"]["stok"].value;
+        var d = document.forms["form"]["deskripsi"].value;
+        var e = document.forms["form"]["gambar"].value;
+        if (a == null || a == "", b == null || b == "", c == null || c == "", d == null || d == "",
+            e == null || e == "") {
+            alert("Data Tidak Boleh Kosong");
+            return false;
+        }
+    }
+</script>
 
 @endsection

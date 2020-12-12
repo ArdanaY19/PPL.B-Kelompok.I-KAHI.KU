@@ -4,10 +4,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12 mt-2">
-            <a href="/customer/{{auth()->user()->customer->id}}/profile" class="btn btn-danger"><i class="fa fa-arrow-left"></i>Kembali</a>
-        </div>
-        <div class="col-md-12 mt-2">
+        <div class="col-md-12 mt-4">
             <div class="card">
                 <div class="card-header">
                     <h1 class="row d-flex align-items-center">
@@ -17,7 +14,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="/customer/{{auth()->user()->customer->id}}/update" method="post" enctype="multipart/form-data">
+                            <form action="/customer/{{auth()->user()->customer->id}}/update" method="post" enctype="multipart/form-data" name="form" onsubmit="return validateForm()">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <input id="nama" type="text" class="form-control" name="nama" placeholder="Nama" value="{{auth()->user()->customer->nama}}">
@@ -41,6 +38,7 @@
                                     <input id=" foto" type="file" name="foto" value="{{asset('foto/'.auth()->user()->customer->foto)}}">
                                 </div>
                                 <div class="form-group">
+                                    <a href="/customer/{{auth()->user()->customer->id}}/profile" class="btn btn-danger">Batal</a>
                                     <button type="submit" class="btn btn-primary">Ubah Data</button>
                                 </div>
                             </form>
@@ -51,5 +49,22 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function validateForm() {
+        var a = document.forms["form"]["nama"].value;
+        var b = document.forms["form"]["username"].value;
+        var c = document.forms["form"]["tanggal_lahir"].value;
+        var d = document.forms["form"]["email"].value;
+        var e = document.forms["form"]["no_hp"].value;
+        var f = document.forms["form"]["alamat"].value;
+        var g = document.forms["form"]["foto"].value;
+        if (a == null || a == "", b == null || b == "", c == null || c == "", d == null || d == "",
+            e == null || e == "", f == null || f == "", g == null || g == "") {
+            alert("Data Tidak Boleh Kosong");
+            return false;
+        }
+    }
+</script>
 
 @endsection

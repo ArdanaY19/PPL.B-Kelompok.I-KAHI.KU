@@ -28,7 +28,7 @@ class PageController extends Controller
             'username' => ['required', 'string', 'max:15'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
-            'alamat' => ['required', 'string', 'max:32'],
+            'alamat' => ['required', 'string'],
             'no_hp' => ['required'],
         ]);
         //insert ke tabel user

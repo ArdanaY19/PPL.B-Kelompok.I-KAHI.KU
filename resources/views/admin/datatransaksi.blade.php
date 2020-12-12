@@ -28,9 +28,11 @@
                                 <td>{{ $transaksi->tanggal }}</td>
                                 <td>
                                     @if($transaksi->status == 1)
-                                    Sudah Melakukan Pemesanan Namun Belum Dibayar
+                                    Belum Dibayar
+                                    @elseif($transaksi->status == 2)
+                                    Sudah Dibayar
                                     @else
-                                    Sudah Melakukan Pemesanan Dan Sudah Dibayar
+                                    Pembayaran Tidak Terverifikasi
                                     @endif
                                 </td>
                                 <td>Rp. {{ number_format($transaksi->jumlah_harga + $transaksi->kode) }}</td>

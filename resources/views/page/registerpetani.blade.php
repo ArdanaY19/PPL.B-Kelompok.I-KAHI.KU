@@ -125,7 +125,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('foto') }}</label>
+                            <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('Foto') }}</label>
 
                             <div class="col-md-6">
                                 <input id="foto" type="file" name="foto">

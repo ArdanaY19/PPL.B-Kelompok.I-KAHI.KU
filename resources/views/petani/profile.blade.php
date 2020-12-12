@@ -4,6 +4,14 @@
 
 <div class="container">
     <div class="row">
+        <div class="col-md-12 mt-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url('/petani/dashboard') }}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                </ol>
+            </nav>
+        </div>
         <div class="col-md-12 mt-3">
             <div class="card">
                 <div class="card-header">
@@ -43,7 +51,7 @@
                             </table>
                         </div>
                         <div class="col-md-6">
-                            <img src="{{ url('foto') }}/{{ auth()->user()->petani->foto }}" class="rounded mx-auto d-block" width="100%" alt="">
+                            <img src="{{ url('foto') }}/{{ auth()->user()->petani->foto }}" class="rounded mx-auto d-block" width="300" alt="">
                         </div>
                     </div>
                 </div>

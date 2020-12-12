@@ -45,7 +45,7 @@
     <div class="container">
       <div class="header-container d-flex align-items-center">
         <div class="logo mr-auto">
-          <h1 class="text-light"><a href="index.html"><span>KAHI.KU</span></a></h1>
+          <h1 class="text-light"><a href="/petani/dashboard"><span>KAHI.KU</span></a></h1>
           <!-- Uncomment below if you prefer to use an image logo -->
           <!-- <a href="index.html"><img src="dashboard/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
@@ -54,14 +54,15 @@
           <ul>
             <li class="{{ request()->is('petani/dashboard') ? 'active' : '' }}"><a href="/petani/dashboard">Home</a></li>
             <li class="{{ request()->is('petani/produk') ? 'active' : '' }}"><a href="/petani/produk">Produk</a></li>
-            <li><a href="#services">Pembayaran</a></li>
-            <li><a href="/petani/artikel">Artikel</a></li>
+            <li class="{{ request()->is('petani/verifikasi') ? 'active' : '' }}"><a href="/petani/verifikasi">Pembayaran</a></li>
+            <li class="{{ request()->is('petani/pendapatan') ? 'active' : '' }}"><a href="/petani/pendapatan">Pendapatan</a></li>
+            <li class="{{ request()->is('petani/artikel') ? 'active' : '' }}"><a href="/petani/artikel">Artikel</a></li>
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{auth()->user()->username}}</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/user/erondu/20x20">
+                <img class="img-profile rounded-circle" src="{{ url('foto') }}/{{ auth()->user()->petani->foto }}" width="20" height="20">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

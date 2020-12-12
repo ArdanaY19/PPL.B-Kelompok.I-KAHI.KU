@@ -144,4 +144,23 @@ class ProdukController extends Controller
 
         return view('customer.historyDetail', compact('transaksi', 'transaksi_details'));
     }
+
+    public function bukti(Request $request, $id)
+    {
+        $this->validate($request, [
+            'bukti_transfer' => ['required', 'mimes:jpg,jpeg,png,bmp,tiff'],
+        ]);
+
+        $transaksi = Transaksi::where('id', $id)->first();
+        $transaksi_details = TransaksiDetail::where('transaksi_id', $transaksi->id)->get();
+        if ($request->hasFile('bukti_transfer')) {
+            $request->file('bukti_transfer')->move('bukti_transfer/', $request->file('bukti_transfer')->getClientOriginalName());
+            $transaksi->bukti_transfer = $request->file('bukti_transfer')->getClientOriginalName();
+            $transaksi->save();
+        }
+        $transaksi->save();
+
+        Alert::success('Bukti Transfer Berhasil Diupload, Menunggu Verifikasi');
+        return view('customer.historyDetail', compact('transaksi', 'transaksi_details'));
+    }
 }

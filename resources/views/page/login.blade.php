@@ -24,11 +24,11 @@
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-              <div class="col-lg-6 d-none d-lg-block"><img src="{{ url('gambar/kacang1.jpg') }}" width="480" height="432" alt=""></div>
+              <div class="col-lg-6 d-none d-lg-block"><img src="{{ url('gambar/kacang1.jpg') }}" width="480" height="448" alt=""></div>
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                    <h1 class="h4 text-gray-900 mb-4 font-weight-bold">LOGIN</h1>
                   </div>
                   <form class="pt-3" method="POST" action="postlogin" name="form" onsubmit="return validateForm()">
                     @csrf
@@ -44,18 +44,18 @@
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
                     </div>
-                    <button type="submit" type="submit" id="submit" value="submit" onclick="sendMessage(); clearInput();" class="btn btn-primary">
+                    <div class="text-center"><button type="submit" type="submit" id="submit" value="submit" onclick="sendMessage(); clearInput();" class="btn btn-outline-primary">
                         {{ __('Login') }}
-                    </button>
+                    </button></div>
+                    <br>
                 </form>
-                  <hr>
-                  <div class="text-center">
-                    <a class="small" href="forgot-password.html">Forgot Password?</a>
+                  <div class="text-center small">
+                    <p>Belum Mempunyai Akun?</p>
                   </div>
                   <div class="text-center">
-                    <a class="small" href="registerpetani">Daftar Petani!</a>
+                    <a class="small btn btn-outline-success" href="registerpetani">Daftar Petani!</a>
                     <a href=""> | </a>
-                    <a class="small" href="registercustomer">Daftar Customer!</a>
+                    <a class="small btn btn-outline-info" href="registercustomer">Daftar Customer!</a>
                   </div>
                 </div>
               </div>

@@ -9,6 +9,7 @@
         <div class="col-md-12 mt-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url('/customer/index') }}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{ url('/customer/produk') }}">Produk</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{ $produk->nama_barang }}</li>
                 </ol>

@@ -9,6 +9,7 @@ use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PetaniProdukController extends Controller
 {
@@ -34,7 +35,7 @@ class PetaniProdukController extends Controller
             'nama_barang' => ['required', 'string', 'max:100'],
             'harga' => ['required', 'integer'],
             'stok' => ['required', 'integer'],
-            'deskripsi' => ['required', 'string', 'max:255'],
+            'deskripsi' => ['required'],
         ]);
         //insert ke tabel user
         $produk = new \App\produk;
@@ -96,6 +97,86 @@ class PetaniProdukController extends Controller
         return redirect('/petani/produk');
     }
     
+    public function verif()
+    {
+        $transaksis = Transaksi::where('status', '!=', 0)->get();
 
+        return view('petani.verifikasi', compact('transaksis'));
+    }
+
+    public function verifikasiDetail($id)
+    {
+        $transaksi = Transaksi::where('id', $id)->first();
+        $transaksi_details = TransaksiDetail::where('transaksi_id', $transaksi->id)->get();
+
+        return view('petani.verifikasiDetail', compact('transaksi', 'transaksi_details'));
+    }
+
+    public function disetujui($id)
+    {
+        $transaksi = Transaksi::where('id', $id)->first();
+        if($transaksi->status == 1){
+            $transaksi->status = 2;
+            $transaksi->update();
+        }elseif($transaksi->status == 2){
+            $transaksi->status = 2;
+            $transaksi->update();
+        }else{
+            $transaksi->status = 2;
+            $transaksi->update();
+        }
+        
+        Alert::success('Verifikasi Pembayaran Diterima');
+        return redirect('/petani/verifikasi');
+    }
+
+    public function ditolak($id)
+    {
+        $transaksi = Transaksi::where('id', $id)->first();
+        if($transaksi->status == 1){
+            $transaksi->status = 3;
+            $transaksi->update();
+        }elseif($transaksi->status == 2){
+            $transaksi->status = 3;
+            $transaksi->update();
+        }else{
+            $transaksi->status = 3;
+            $transaksi->update();
+        }
+
+        Alert::error('Verifikasi Pembayaran Ditolak');
+        return redirect('/petani/verifikasi');
+    }
+
+    public function pendapatan()
+    {
+        // $data = \DB::table('transaksis as t')
+        // ->join('transaksi_details as td', 't.id', '=', 'td.transaksi_id')->where('status', '=', 2)
+        // ->select([
+        //     \DB::raw('sum(jumlah_harga) as Total'),
+        //     \DB::raw('sum(kode) as jumlahkode'),
+        //     \DB::raw('sum(jumlah) as keseluruhan')
+        // ])
+        // ->get()
+        // ->toArray();
+
+        // $coba = \DB::table('transaksi_details')
+        // ->select([
+        //     \DB::raw('sum(jumlah) as keseluruhan')
+        // ])
+        // ->get()
+        // ->toArray();
+
+        $data = DB::table('transaksis as t')
+        ->join('transaksi_details as td', 't.id', '=', 'td.transaksi_id')->where('t.status', '=', 2)
+        ->select([
+            DB::raw('sum(t.jumlah_harga) as total'),
+            DB::raw('sum(t.kode) as kodeunik'),
+            DB::raw('sum(td.jumlah) as produk')
+        ])
+        ->get();
+
+        return view('petani.pendapatan', compact('data'));
+    }
     
 }

@@ -2,6 +2,14 @@
 
 @section('content')
 <div class="container">
+    <div class="col-md-12 mt-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url('/petani/dashboard') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Artikel</li>
+            </ol>
+        </nav>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-12 mb-2 mt-2">
             <h2 class="text-center font-weight-bold">Artikel</h2>

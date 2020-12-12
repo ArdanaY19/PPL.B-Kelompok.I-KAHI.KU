@@ -42,7 +42,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('/')->with('logout', 'Anda yakin ingin keluar ?');
+        return redirect('/login')->with('logout', 'Anda yakin ingin keluar ?');
     }
 
     //homenya admin

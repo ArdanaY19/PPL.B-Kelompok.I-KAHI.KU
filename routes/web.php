@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/', 'PageController@home');
+Route::get('/login', 'PageController@home');
 Route::get('/registercustomer', 'PageController@registercustomer');
 Route::get('/registerpetani', 'PageController@registerpetani')->name('register');
 Route::post('/postregistercustomer', 'PageController@postregistercustomer');
@@ -67,6 +67,11 @@ Route::group(['middleware' => ['auth', 'CheckRole:petani']], function(){
     Route::post('/petani/produk/{id}', 'PetaniProdukController@update');
     Route::get('/petani/artikel', 'PetaniController@artikel');
     Route::get('/petani/showartikel/{id}', 'PetaniController@show');
+    Route::get('/petani/verifikasi', 'PetaniProdukController@verif');
+    Route::get('/petani/verifikasi/{id}', 'PetaniProdukController@verifikasiDetail');
+    Route::get('/petani/disetujuiverifikasi/{id}', 'PetaniProdukController@disetujui');
+    Route::get('/petani/ditolakverifikasi/{id}', 'PetaniProdukController@ditolak');
+    Route::get('/petani/pendapatan', 'PetaniProdukController@pendapatan');
 });
 
 Route::group(['middleware' => ['auth', 'CheckRole:customer']], function(){
@@ -84,5 +89,6 @@ Route::group(['middleware' => ['auth', 'CheckRole:customer']], function(){
     Route::get('/customer/history/{id}', 'ProdukController@historyDetail');
     Route::get('/customer/artikel', 'CustomerController@artikel');
     Route::get('/customer/showartikel/{id}', 'CustomerController@show');
+    Route::post('/customer/history/{id}', 'ProdukController@bukti');
     });
   
