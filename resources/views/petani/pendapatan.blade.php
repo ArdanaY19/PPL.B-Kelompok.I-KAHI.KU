@@ -18,16 +18,28 @@
                     <table class="table table-striped">
                         <thead>
                             <tr class="text-center">
-                                <th>Total Produk Terjual</th>
-                                <th>Total Pendapatan</th>
+                                <th>Nama Produk</th>
+                                <th>Tanggal Pemesanan</th>
+                                <th>Produk Terjual</th>
+                                <th>Pendapatan</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 @foreach($data as $d)
                                 <tr class="text-center">
+                                    <td class="text-capitalize">{{ $d->nama_produk }}</td>
+                                    <td>{{ date("d F Y", strtotime($d->tanggal_pesan)) }}</td>
                                     <td>{{ number_format($d->produk) }} kg</td>
                                     <td>Rp. {{ number_format($d->total + $d->kodeunik) }}</td>
+                                </tr>
+                                @endforeach
+                                @foreach($total as $t)
+                                <tr class="text-center">
+                                    <td></td>
+                                    <td><strong>Total : </strong></td>
+                                    <td>{{ number_format($t->stok) }} kg</td>
+                                    <td>Rp. {{ number_format($t->jumlah + $t->unik) }}</td>
                                 </tr>
                                 @endforeach
                             </tr>

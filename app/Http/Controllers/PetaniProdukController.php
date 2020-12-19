@@ -99,7 +99,7 @@ class PetaniProdukController extends Controller
     
     public function verif()
     {
-        $transaksis = Transaksi::where('status', '!=', 0)->get();
+        $transaksis = Transaksi::where('status', '!=', 0)->where('bukti_transfer', '!=', '')->orderBy('id', 'desc')->get();
 
         return view('petani.verifikasi', compact('transaksis'));
     }
@@ -167,16 +167,49 @@ class PetaniProdukController extends Controller
         // ->get()
         // ->toArray();
 
-        $data = DB::table('transaksis as t')
-        ->join('transaksi_details as td', 't.id', '=', 'td.transaksi_id')->where('t.status', '=', 2)
+        $data = DB::table('transaksi_details as td')
+        ->join('transaksis as t', 't.id', '=', 'td.transaksi_id')
+        ->join('produks as p', 'p.id', '=', 'td.produk_id')->where('t.status', '=', 2)
         ->select([
             DB::raw('sum(t.jumlah_harga) as total'),
             DB::raw('sum(t.kode) as kodeunik'),
-            DB::raw('sum(td.jumlah) as produk')
+            DB::raw('sum(td.jumlah) as produk'),
+            DB::raw('DATE(t.tanggal) as tanggal_pesan'),
+            DB::raw('p.nama_barang as nama_produk')
+        ])
+        ->groupBy('nama_produk', 'tanggal_pesan')
+        ->orderBy('tanggal_pesan', 'desc')
+        ->get();
+
+        $total = DB::table('transaksis as t')
+        ->join('transaksi_details as td', 't.id', '=', 'td.transaksi_id')->where('t.status', '=', 2)
+        ->select([
+            DB::raw('sum(t.jumlah_harga) as jumlah'),
+            DB::raw('sum(t.kode) as unik'),
+            DB::raw('sum(td.jumlah) as stok')
         ])
         ->get();
 
-        return view('petani.pendapatan', compact('data'));
+        return view('petani.pendapatan', compact('data', 'total'));
+    }
+
+    public function bukti(Request $request, $id)
+    {
+        $validation = $request->validate([
+            'bukti_resi' => ['required', 'mimes:jpg,jpeg,png,bmp,tiff'],
+        ]);
+
+        $transaksi = Transaksi::where('id', $id)->first();
+        $transaksi_details = TransaksiDetail::where('transaksi_id', $transaksi->id)->get();
+        if ($request->hasFile('bukti_resi')) {
+            $request->file('bukti_resi')->move('bukti_resi/', $request->file('bukti_resi')->getClientOriginalName());
+            $transaksi->bukti_resi = $request->file('bukti_resi')->getClientOriginalName();
+            $transaksi->save();
+        }
+        $transaksi->save();
+
+        Alert::success('Bukti Resi Berhasil Diupload');
+        return redirect('/petani/verifikasi');
     }
     
 }

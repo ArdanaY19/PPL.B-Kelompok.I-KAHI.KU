@@ -25,7 +25,7 @@
                                 <td>{{ $no++ }}</td>
                                 <td class="text-uppercase">{{ $transaksi->user->customer->nama }}</td>
                                 <td>{{ $transaksi->user->email }}</td>
-                                <td>{{ $transaksi->tanggal }}</td>
+                                <td>{{ date("d F Y", strtotime($transaksi->tanggal)) }}</td>
                                 <td>
                                     @if($transaksi->status == 1)
                                     Belum Dibayar

@@ -66,11 +66,12 @@
   </section><!-- End Hero -->
    
        <!-- Page Heading -->
+  
        <!-- Begin Page Content -->
 
      
 
-<div class="container d-md-flex mt-5">
+<div class="container d-md-flex mt-5 small">
 
   <div class="mr-md-auto text-center text-md-left">
     <div class="copyright">

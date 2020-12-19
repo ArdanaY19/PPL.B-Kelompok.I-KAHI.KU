@@ -55,6 +55,7 @@
             <li class="{{ request()->is('customer/index') ? 'active' : '' }}"><a href="/customer/index">Home</a></li>
             <li class="{{ request()->is('customer/produk') ? 'active' : '' }}"><a href="/customer/produk">Produk</a></li>
             <li class="{{ request()->is('customer/history') ? 'active' : '' }}"><a href="/customer/history">Riwayat Pemesanan</a></li>
+            <li class="{{ request()->is('customer/ongkir') ? 'active' : '' }}"><a href="/customer/ongkir">Ongkir</a></li>
             <li class="{{ request()->is('#') ? 'active' : '' }}"><a href="/customer/artikel">Artikel</a></li>
 
             <li class="nav-item {{ request()->is('customer/check_out') ? 'active' : '' }}">

@@ -37,7 +37,7 @@
                             @foreach($transaksi_details as $transaksi_detail)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $transaksi_detail->produk->nama_barang }}</td>
+                                <td class="text-capitalize">{{ $transaksi_detail->produk->nama_barang }}</td>
                                 <td>
                                     <button type="button" data-toggle="modal" data-target="#exampleModalCenter"><img src="{{ url('bukti_transfer') }}/{{ $transaksi_detail->transaksi->bukti_transfer }}" width="100" height="100" alt="..."></button>
                                 </td>
@@ -64,6 +64,15 @@
 
                                 <td " align="left"><a href="{{ url('/petani/disetujuiverifikasi') }}/{{ $transaksi->id }}" class="btn btn-success"><i class=""></i> Disetujui</a></td>
                             </tr>
+                            <tr>
+                                @if($transaksi->bukti_resi == '')
+                                <td colspan="5" ><strong></strong></td>
+                                <td align="left"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-upload"></i> Upload Resi</button></td>
+                                @else
+                                <td colspan="5" ><strong></strong></td>
+                                <td align="left"><button type="button" class="btn btn-danger" readonly title="Bukti Resi Telah Diupload" hidden=""><i class="fas fa-upload"></i> Upload Resi</button></td>
+                                @endif
+                            </tr>
                         </tbody>
                     </table>
                     @endif
@@ -77,15 +86,27 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title font-weight-bold text-center" id="exampleModalLongTitle">Bukti Transfer</h5>
+        <h5 class="modal-title font-weight-bold" id="exampleModalLongTitle">Upload Resi Pengiriman</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-            <img src="{{ url('bukti_transfer') }}/{{ $transaksi_detail->transaksi->bukti_transfer }}" width="475" height="500" alt="...">
+            <p>Upload Resi Pengiriman Untuk <strong></strong></p>
+        </div>
+        <form action="{{ url('/petani/resi') }}/{{ $transaksi->id }}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <input id="bukti_resi" type="file" name="bukti_resi" required>
+            </div>
+            <div class="form-group text-right">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> Upload Bukti</button>
+            </div>
+        </form>
       </div>
+      
     </div>
   </div>
 </div>

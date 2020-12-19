@@ -9,6 +9,10 @@ use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Province;
+use App\City;
+use App\Courier;
+use Kavist\RajaOngkir\Facades\RajaOngkir;
 
 class ProdukController extends Controller
 {
@@ -37,6 +41,7 @@ class ProdukController extends Controller
         //validasi melebihi stok
         if($request->jumlah_pesan > $produk->stok)
         {
+            Alert::error('Maaf, Pesanan Melebihi Stok');
             return redirect('/customer/detailproduk/'.$id);
         }
 
@@ -132,7 +137,7 @@ class ProdukController extends Controller
 
     public function history()
     {
-        $transaksis = Transaksi::where('user_id', Auth::user()->id)->where('status', '!=', 0)->get();
+        $transaksis = Transaksi::where('user_id', Auth::user()->id)->where('status', '!=', 0)->orderBy('id', 'desc')->get();
 
         return view('customer.history', compact('transaksis'));
     }
@@ -147,9 +152,14 @@ class ProdukController extends Controller
 
     public function bukti(Request $request, $id)
     {
-        $this->validate($request, [
+        $validation = $request->validate([
             'bukti_transfer' => ['required', 'mimes:jpg,jpeg,png,bmp,tiff'],
         ]);
+
+        // if($validation->fails()){
+        //     Session::flash('error', $validation->messages()->first());
+        //     return redirect()->back()->withInput()->withErrors($validation);
+        // }
 
         $transaksi = Transaksi::where('id', $id)->first();
         $transaksi_details = TransaksiDetail::where('transaksi_id', $transaksi->id)->get();
@@ -161,6 +171,57 @@ class ProdukController extends Controller
         $transaksi->save();
 
         Alert::success('Bukti Transfer Berhasil Diupload, Menunggu Verifikasi');
-        return view('customer.historyDetail', compact('transaksi', 'transaksi_details'));
+        return redirect('/customer/history');
     }
+
+    // public function ongkir()
+    // {
+    //     $couriers = Courier::pluck('title', 'code');
+    //     $provinces = Province::pluck('title', 'province_id');
+    //     return view('customer.ongkir', compact('couriers', 'provinces'));
+    // }
+
+    // public function getCities($id)
+    // {
+    //     $city = City::where('province_id', $id)->pluck('title', 'city_id');
+    //     return json_encode($city);
+    // }
+
+    // public function getOngkir(Request $request)
+    // {
+    //     $cost = RajaOngkir::ongkosKirim([
+    //         'origin'        => $request->city_origin,
+    //         'destination'   => $request->city_destination,
+    //         'weight'        => $request->weight,
+    //         'courier'       => $request->courier, 
+    //     ])->get();
+
+    //     dd($cost);
+    // }
+
+    public function ongkir()
+    {
+        $provinces = Province::pluck('title', 'province_id');
+        $couriers = Courier::pluck('title', 'code');
+        return view('customer.ongkir', compact('provinces', 'couriers'));
+    }
+
+    public function getCities($id)
+    {
+        $cities = City::where('province_id', $id)->pluck('title', 'city_id');
+        return view('customer.ongkir', compact('cities'));
+    }
+
+    public function getOngkir(Request $request)
+    {
+        $cost = RajaOngkir::ongkosKirim([
+            'origin'        => 113,
+            'destination'   => $request->city_destination,
+            'weight'        => $request->weight,
+            'courier'       => $request->courier, 
+        ])->get();
+
+        dd($cost);
+    }
+
 }

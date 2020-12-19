@@ -24,6 +24,7 @@
                                 <th>Tanggal Pemesanan</th>
                                 <th>Status</th>
                                 <th>Total Harga</th>
+                                <th>Bukti Resi</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -34,7 +35,7 @@
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $transaksi->user->email }}</td>
                                 <td class="text-capitalize">{{ $transaksi->user->customer->alamat }}</td>
-                                <td>{{ $transaksi->tanggal }}</td>
+                                <td>{{ date("d F Y", strtotime($transaksi->tanggal)) }}</td>
                                 <td>
                                     @if($transaksi->status == 1)
                                     Belum Diverifikasi
@@ -45,7 +46,14 @@
                                     @endif
                                 </td>
                                 <td>Rp. {{ number_format($transaksi->jumlah_harga + $transaksi->kode) }}</td>
-                                <td><a href="{{ url('/petani/verifikasi') }}/{{ $transaksi->id }}" class="btn btn-primary"><i class="fa fa-info"></i> Detail</a></td>
+                                @if($transaksi->bukti_resi != "")
+                                <td><img src="{{ url('bukti_resi') }}/{{ $transaksi->bukti_resi }}" width="100" height="100" alt="..."></td>
+                                @else
+                                <td>Resi Belum Diupload</td>
+                                @endif
+                                <td>
+                                    <a href="{{ url('/petani/verifikasi') }}/{{ $transaksi->id }}" class="btn btn-primary"><i class="fa fa-info"></i> Detail</a>                             
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -55,4 +63,5 @@
         </div>
     </div>
 </div>
+
 @endsection

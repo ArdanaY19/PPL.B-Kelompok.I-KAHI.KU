@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:petani']], function(){
     Route::get('/petani/disetujuiverifikasi/{id}', 'PetaniProdukController@disetujui');
     Route::get('/petani/ditolakverifikasi/{id}', 'PetaniProdukController@ditolak');
     Route::get('/petani/pendapatan', 'PetaniProdukController@pendapatan');
+    Route::post('/petani/resi/{id}', 'PetaniProdukController@bukti');
 });
 
 Route::group(['middleware' => ['auth', 'CheckRole:customer']], function(){
@@ -90,5 +91,9 @@ Route::group(['middleware' => ['auth', 'CheckRole:customer']], function(){
     Route::get('/customer/artikel', 'CustomerController@artikel');
     Route::get('/customer/showartikel/{id}', 'CustomerController@show');
     Route::post('/customer/history/{id}', 'ProdukController@bukti');
-    });
+    Route::get('/customer/ongkir', 'ProdukController@ongkir');
+    Route::get('/province/{id}/cities', 'ProdukController@getCities');
+    Route::post('/customer/ongkir', 'ProdukController@getOngkir');
+    
+});
   
