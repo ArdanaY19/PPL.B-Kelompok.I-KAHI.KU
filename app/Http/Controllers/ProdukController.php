@@ -9,9 +9,9 @@ use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Province;
+use Illuminate\Support\Facades\Http;
 use App\City;
-use App\Courier;
+use App\Province;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 
 class ProdukController extends Controller
@@ -147,6 +147,8 @@ class ProdukController extends Controller
         $transaksi = Transaksi::where('id', $id)->first();
         $transaksi_details = TransaksiDetail::where('transaksi_id', $transaksi->id)->get();
 
+        
+
         return view('customer.historyDetail', compact('transaksi', 'transaksi_details'));
     }
 
@@ -199,29 +201,29 @@ class ProdukController extends Controller
     //     dd($cost);
     // }
 
-    public function ongkir()
-    {
-        $provinces = Province::pluck('title', 'province_id');
-        $couriers = Courier::pluck('title', 'code');
-        return view('customer.ongkir', compact('provinces', 'couriers'));
-    }
+    // public function ongkir()
+    // {
+    //     $provinces = Province::all();
+    //     $couriers = Courier::all();
+    //     return view('customer.ongkir', compact('provinces', 'couriers'));
+    // }
 
-    public function getCities($id)
-    {
-        $cities = City::where('province_id', $id)->pluck('title', 'city_id');
-        return view('customer.ongkir', compact('cities'));
-    }
+    // public function getCitiesAjax($id)
+    // {
+    //     $cities = City::where('province_id', $id)->pluck('title', 'city_id')->get();
+    //     return view('customer.ongkir', compact('cities'));
+    // }
 
-    public function getOngkir(Request $request)
-    {
-        $cost = RajaOngkir::ongkosKirim([
-            'origin'        => 113,
-            'destination'   => $request->city_destination,
-            'weight'        => $request->weight,
-            'courier'       => $request->courier, 
-        ])->get();
+    // public function getOngkir(Request $request)
+    // {
+    //     $cost = RajaOngkir::ongkosKirim([
+    //         'origin'        => 113,
+    //         'destination'   => $request->city_destination,
+    //         'weight'        => $request->weight,
+    //         'courier'       => $request->courier, 
+    //     ])->get();
 
-        dd($cost);
-    }
+    //     dd($cost);
+    // }
 
 }

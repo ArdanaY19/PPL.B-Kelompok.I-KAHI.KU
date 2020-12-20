@@ -55,14 +55,25 @@
                                 <td " align="right"><strong>Rp. {{ number_format($transaksi->kode) }}</strong></td>
                             </tr>
                             <tr>
-                                <td colspan="5" align="right"><strong>Total Pembayaran :</strong></td>
-                                <td " align="right"><strong>Rp. {{ number_format($transaksi->jumlah_harga + $transaksi->kode) }}</strong></td>
+                                <td colspan="5" align="right"><strong>Ongkos Kirim :</strong></td>
+                                <td " align="right"><strong>Rp. {{ number_format(($transaksi->ongkir * $transaksi_detail->jumlah)) }}</strong></td>
                             </tr>
                             <tr>
+                                <td colspan="5" align="right"><strong>Total Pembayaran :</strong></td>
+                                <td " align="right"><strong>Rp. {{ number_format($transaksi->jumlah_harga + $transaksi->kode + ($transaksi->ongkir * $transaksi_detail->jumlah)) }}</strong></td>
+                            </tr>
+                            <tr>
+                                @if($transaksi->status != 1)
                                 <td colspan="4" align="right"><strong></strong></td>
-                                <td " align="right"><a href="{{ url('/petani/ditolakverifikasi') }}/{{ $transaksi->id }}" class="btn btn-danger"><i class=""></i> Ditolak</a></td>
+                                <td " align="right"><button type="button" class="btn btn-secondary" readonly title="Telah Diverifikasi">Ditolak</button></td>
 
-                                <td " align="left"><a href="{{ url('/petani/disetujuiverifikasi') }}/{{ $transaksi->id }}" class="btn btn-success"><i class=""></i> Disetujui</a></td>
+                                <td " align="left"><button type="button" class="btn btn-secondary" readonly title="Telah Diverifikasi">Disetujui</button></td>
+                                @else
+                                <td colspan="4" align="right"><strong></strong></td>
+                                <td " align="right"><a href="{{ url('/petani/ditolakverifikasi') }}/{{ $transaksi->id }}" class="btn btn-danger">Ditolak</a></td>
+
+                                <td " align="left"><a href="{{ url('/petani/disetujuiverifikasi') }}/{{ $transaksi->id }}" class="btn btn-success">Disetujui</a></td>
+                                @endif
                             </tr>
                             <tr>
                                 @if($transaksi->bukti_resi == '')

@@ -35,7 +35,7 @@
                     <h3><i class="fa fa-shopping-cart"></i> Detail Pemesanan </h3>
                     @if(!empty($transaksi))
                     <p align="right">Tanggal Pesan : {{ $transaksi->tanggal }}</p>
-                    <table class="table table-striped">
+                    <table class="table table-striped mt-2">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -76,11 +76,15 @@
                                 <td></td><td></td><td></td><td></td><td></td>
                                 <td ><strong>Kode Unik :</strong></td>
                                 <td ><strong>Rp. {{ number_format($transaksi->kode) }}</strong></td>
+                            </tr><tr>
+                                <td></td><td></td><td></td><td></td><td></td>
+                                <td ><strong>Ongkos Kirim :</strong></td>
+                                <td ><strong>Rp. {{ number_format(($transaksi->ongkir * $transaksi_detail->jumlah)) }}</strong></td>
                             </tr>
                             <tr>
                                 <td></td><td></td><td></td><td></td><td></td>
                                 <td ><strong>Total Bayar :</strong></td>
-                                <td ><strong>Rp. {{ number_format($transaksi->jumlah_harga + $transaksi->kode) }}</strong></td>
+                                <td ><strong>Rp. {{ number_format($transaksi->jumlah_harga + $transaksi->kode + ($transaksi->ongkir * $transaksi_detail->jumlah)) }}</strong></td>
                             </tr>
                             <tr>
                                 @if($transaksi->bukti_transfer == '')
@@ -113,7 +117,7 @@
       <div class="modal-body">
         <div class="form-group">
                 <p>Pembayaran ke rek BNI senilai <strong>Rp. {{ number_format($transaksi->jumlah_harga + $transaksi->kode) }}</strong></p>
-				<p>Nomer Rekening : 31248-23182-129318 a.n. </p>
+				<p>Nomer Rekening : 31248-23182-129318 a.n. Ardana Yuli Ariyanto </p>
             </div>
         <form action="{{ url('/customer/history') }}/{{ $transaksi->id }}" method="post" enctype="multipart/form-data">
             @csrf

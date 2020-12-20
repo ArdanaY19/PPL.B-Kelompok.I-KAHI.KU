@@ -14,10 +14,11 @@ class CreateCitiesTable extends Migration
     public function up()
     {
         Schema::create('cities', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedInteger('province_id');
-            $table->unsignedInteger('city_id');
-            $table->string('title');
+            $table->id(); 
+            $table->bigInteger('province_id')->unsigned();  
+            $table->string('type');
+            $table->string('city_name');   
+            $table->string('postal_code', 10);
             $table->timestamps();
         });
     }

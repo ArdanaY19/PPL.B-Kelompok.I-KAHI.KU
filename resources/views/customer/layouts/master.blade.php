@@ -17,6 +17,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  @yield('header')
 
   <!-- Vendor CSS Files -->
   <link href="{{ asset('../dashboard/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -55,7 +56,7 @@
             <li class="{{ request()->is('customer/index') ? 'active' : '' }}"><a href="/customer/index">Home</a></li>
             <li class="{{ request()->is('customer/produk') ? 'active' : '' }}"><a href="/customer/produk">Produk</a></li>
             <li class="{{ request()->is('customer/history') ? 'active' : '' }}"><a href="/customer/history">Riwayat Pemesanan</a></li>
-            <li class="{{ request()->is('customer/ongkir') ? 'active' : '' }}"><a href="/customer/ongkir">Ongkir</a></li>
+            <!-- <li class="{{ request()->is('ongkir') ? 'active' : '' }}"><a href="/ongkir">Ongkos Kirim</a></li> -->
             <li class="{{ request()->is('#') ? 'active' : '' }}"><a href="/customer/artikel">Artikel</a></li>
 
             <li class="nav-item {{ request()->is('customer/check_out') ? 'active' : '' }}">

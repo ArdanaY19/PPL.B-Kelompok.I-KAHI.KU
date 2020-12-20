@@ -14,16 +14,8 @@
         </div>
       </div>
       <div class="card-body">
-          <form action="{{url('/customer/ongkir')}}" method="get">
+          <form action="{{url('/ongkir')}}" method="get">
               @csrf
-              <!-- <div class="row">
-                  <div class="col-sm-12">
-                      <h6>Nama Anda</h6>
-                      <div class="form-group">
-                          <input name="name" type="text" class="form-control" required>
-                      </div>
-                  </div>
-              </div> -->
               <div class="row">
                   <div class="col-sm-6">
                       <h6>Kirim Dari</h6>
@@ -83,7 +75,7 @@
 
               <div class="row">
                   <div class="col">
-                      <button type="submit" class="btn btn-info btn-block">Cek Ongkir</button>
+                      <button type="submit" class="btn btn-success btn-block">Cek Ongkir</button>
                   </div>
               </div>
           </form>

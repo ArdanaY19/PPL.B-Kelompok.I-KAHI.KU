@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/ongkir', 'getApi@ongkir');
+Route::get('getCity/ajax/{id}', 'getApi@ajax');
+// Route::post('/', 'getApi@getOngkir');
+
 Auth::routes();
 Route::get('/login', 'PageController@home');
 Route::get('/registercustomer', 'PageController@registercustomer');
@@ -91,9 +96,14 @@ Route::group(['middleware' => ['auth', 'CheckRole:customer']], function(){
     Route::get('/customer/artikel', 'CustomerController@artikel');
     Route::get('/customer/showartikel/{id}', 'CustomerController@show');
     Route::post('/customer/history/{id}', 'ProdukController@bukti');
-    Route::get('/customer/ongkir', 'ProdukController@ongkir');
-    Route::get('/province/{id}/cities', 'ProdukController@getCities');
-    Route::post('/customer/ongkir', 'ProdukController@getOngkir');
+    // Route::get('/customer/ongkir', 'ProdukController@ongkir');
+    // Route::get('/getCity/ajax/{id}', 'ProdukController@getCitiesAjax');
+    // Route::post('/customer/ongkir', 'ProdukController@getOngkir');
+    // Route::get('/customer/ongkir', 'OngkirController@ongkir');
+    // Route::get('/getCity/ajax/{id}', 'OngkirController@getCitiesAjax');
+    // Route::get('/customer/ongkir', 'getApi@ongkir');
+    // Route::get('getCity/ajax/{id}', 'getApi@ajax');
+    
     
 });
   
