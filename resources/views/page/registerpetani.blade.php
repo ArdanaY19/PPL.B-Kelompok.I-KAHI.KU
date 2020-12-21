@@ -19,10 +19,10 @@
                     <form method="POST" action="/postregisterpetani" enctype="multipart/form-data" name="form" onsubmit="return validateForm()">
                         @csrf
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama') }}</label>
+                            <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('Nama') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" autocomplete="nama" autofocus>
+                                <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" autocomplete="nama" autofocus>
 
                                 @error('nama')
                                 <span class="invalid-feedback" role="alert">
@@ -128,7 +128,12 @@
                             <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('Foto') }}</label>
 
                             <div class="col-md-6">
-                                <input id="foto" type="file" name="foto">
+                                <input id="foto" type="file" class="form-control @error('foto') is-invalid @enderror" name="foto" value="{{ old('foto') }}" autocomplete="foto" autofocus>
+                                @error('foto')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
 

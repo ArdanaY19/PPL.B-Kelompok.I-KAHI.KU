@@ -16,27 +16,103 @@
                         <div class="col-md-12">
                             <form action="/petani/{{auth()->user()->petani->id}}/update" method="post" enctype="multipart/form-data" name="form" onsubmit="return validateForm()">
                                 {{ csrf_field() }}
-                                <div class="form-group">
-                                    <input id="nama" type="text" class="form-control" name="nama" placeholder="Nama" value="{{auth()->user()->petani->nama}}">
+                                <div class="form-group row">
+                                    <label for="nama" class="col-md-4">{{ __('Nama') }}</label>
+
+                                    <div class="col-md-12">
+                                        <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{auth()->user()->petani->nama}}" autocomplete="nama" autofocus>
+
+                                        @error('nama')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <input id="username" type="text" class="form-control" name="username" placeholder="username" value="{{auth()->user()->username}}">
+
+                                <div class="form-group row">
+                                    <label for="username" class="col-md-4">{{ __('Username') }}</label>
+
+                                    <div class="col-md-12">
+                                        <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{auth()->user()->username}}" autocomplete="username" autofocus>
+
+                                        @error('username')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <input id="tanggal_lahir" type="date" class="form-control" name="tanggal_lahir" placeholder="Tanggal Lahir" value="{{auth()->user()->petani->tanggal_lahir}}">
+
+                                <div class="form-group row">
+                                    <label for="email" class="col-md-4">{{ __('Email') }}</label>
+
+                                    <div class="col-md-12">
+                                        <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{auth()->user()->email}}" autocomplete="email" autofocus>
+
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <input id="email" type="email" class="form-control" name="email" placeholder="Email" value="{{auth()->user()->email}}">
+
+                                <div class="form-group row">
+                                    <label for="alamat" class="col-md-4">{{ __('Alamat') }}</label>
+
+                                    <div class="col-md-12">
+                                        <input id="alamat" type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" value="{{auth()->user()->petani->alamat}}" autocomplete="alamat" autofocus>
+
+                                        @error('alamat')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <input id="no_hp" type="number" class="form-control" name="no_hp" placeholder="No HP" value="{{auth()->user()->petani->no_hp}}">
+
+                                <div class="form-group row">
+                                    <label for="no_hp" class="col-md-4">{{ __('Nomor Telepon') }}</label>
+
+                                    <div class="col-md-12">
+                                        <input id="no_hp" type="number" class="form-control @error('no_hp') is-invalid @enderror" name="no_hp" value="{{auth()->user()->petani->no_hp}}" autocomplete="no_hp" autofocus>
+
+                                        @error('no_hp')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <input id="alamat" type="text" class="form-control" name="alamat" placeholder="Alamat" value="{{auth()->user()->petani->alamat}}">
+
+                                <div class="form-group row">
+                                    <label for="tanggal_lahir" class="col-md-4">{{ __('Tanggal Lahir') }}</label>
+
+                                    <div class="col-md-12">
+                                        <input id="tanggal_lahir" type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" name="tanggal_lahir" value="{{auth()->user()->petani->tanggal_lahir}}" autocomplete="tanggal_lahir" autofocus>
+
+                                        @error('tanggal_lahir')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <input id=" foto" type="file" name="foto" value="{{asset('foto/'.auth()->user()->petani->foto)}}">
+
+                                <div class="form-group row">
+                                    <label for="foto" class="col-md-4">{{ __('Foto') }}</label>
+
+                                    <div class="col-md-12">
+                                        <input id="foto" type="file" class="form-control @error('foto') is-invalid @enderror" name="foto" value="{{asset('foto/'.auth()->user()->petani->foto)}}" autocomplete="foto" autofocus>
+                                        @error('foto')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
                                 </div>
+                                
                                 <div class="form-group">
                                     <a href="/petani/{{auth()->user()->petani->id}}/profile" class="btn btn-danger">Batal</a>
                                     <button type="submit" class="btn btn-primary">Ubah Data</button>
@@ -50,7 +126,7 @@
     </div>
 </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     function validateForm() {
         var a = document.forms["form"]["nama"].value;
         var b = document.forms["form"]["username"].value;
@@ -65,6 +141,6 @@
             return false;
         }
     }
-</script>
+</script> -->
 
 @endsection

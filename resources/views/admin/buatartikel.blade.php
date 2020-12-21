@@ -14,16 +14,32 @@
 
                         <div class="form-group">
                             <label for="">Judul Artikel</label>
-                            <input type="text" name="judul_artikel" id="judul_artikel" class="form-control">
+                            <input type="text" name="judul_artikel" id="judul_artikel" class="form-control @error('judul_artikel') is-invalid @enderror" value="{{ old('judul_artikel') }}" autocomplete="judul_artikel" autofocus>
+                            @error('judul_artikel')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="">Deskripsi Artikel</label>
-                            <textarea type="text" name="deskripsi_artikel" id="deskripsi_artikel" class="form-control" cols="83" rows="5"></textarea>
+                            <textarea type="text" name="deskripsi_artikel" id="deskripsi_artikel"  cols="83" rows="5" class="form-control @error('deskripsi_artikel') is-invalid @enderror" value="{{ old('deskripsi_artikel') }}" autocomplete="deskripsi_artikel" autofocus></textarea>
+                            @error('deskripsi_artikel')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
-                            <input id="foto_artikel" type="file" name="foto_artikel">
+                            <label for="">Foto Artikel</label>
+                            <input id="foto_artikel" type="file" class="form-control @error('foto_artikel') is-invalid @enderror" name="foto_artikel" value="{{ old('foto_artikel') }}" autocomplete="foto_artikel" autofocus>
+                            @error('foto_artikel')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
@@ -38,7 +54,7 @@
 </div>
 </body>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     function validateForm() {
         var a = document.forms["form"]["judul_artikel"].value;
         var b = document.forms["form"]["deskripsi_artikel"].value;
@@ -48,6 +64,6 @@
             return false;
         }
     }
-</script>
+</script> -->
 
 @endsection

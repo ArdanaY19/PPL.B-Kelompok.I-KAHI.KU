@@ -45,7 +45,7 @@
                                     <tr>
                                         <td><i class="fa fa-map-marker"></i> Alamat</td>
                                         <td>:</td>
-                                        <td>{{auth()->user()->petani->alamat}}</td>
+                                        <td class="text-capitalize">{{auth()->user()->petani->alamat}}</td>
                                     </tr>
                                 </tbody>
                             </table>

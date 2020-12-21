@@ -13,17 +13,28 @@
                         {{ csrf_field() }}
 
                         <div class="form-group">
-                            <label for="">Nama artikel</label>
-                            <input type="text" name="judul_artikel" id="judul_artikel" class="form-control" value="{{ $artikels->judul_artikel }}">
+                            <label for="">Judul Artikel</label>
+                            <input type="text" name="judul_artikel" id="judul_artikel" class="form-control @error('judul_artikel') is-invalid @enderror" value="{{ $artikels->judul_artikel }}" autocomplete="judul_artikel" autofocus>
+                            @error('judul_artikel')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
-                            <label for="">Deskripsi artikel</label>
+                            <label for="">Deskripsi Artikel</label>
                             <textarea type="text" name="deskripsi_artikel" id="deskripsi_artikel" class="form-control" cols="83" rows="5" >{{ $artikels->deskripsi_artikel }}</textarea>
                         </div>
 
                         <div class="form-group">
-                            <input id="foto_artikel" type="file" name="foto_artikel">
+                            <label for="">Foto Artikel</label>
+                            <input id="foto_artikel" type="file" class="form-control @error('foto_artikel') is-invalid @enderror" name="foto_artikel" value="{{ old('foto_artikel') }}" autocomplete="foto_artikel" autofocus>
+                            @error('foto_artikel')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <img src="{{ url('foto_artikel') }}/{{ $artikels->foto_artikel }}" width="50%" alt="">
@@ -41,7 +52,7 @@
 </div>
 </body>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     function validateForm() {
         var a = document.forms["form"]["judul_artikel"].value;
         var b = document.forms["form"]["deskripsi_artikel"].value;
@@ -51,6 +62,6 @@
             return false;
         }
     }
-</script>
+</script> -->
 
 @endsection

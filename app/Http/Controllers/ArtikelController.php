@@ -31,6 +31,7 @@ class ArtikelController extends Controller
         $this->validate($request, [
             'judul_artikel' => ['required', 'string', 'max:100'],
             'deskripsi_artikel' => ['required'],
+            'foto_artikel' => ['required', 'mimes:jpg,jpeg,png'],
         ]);
         //insert ke tabel user
         $artikel = new \App\Artikel;
@@ -43,7 +44,7 @@ class ArtikelController extends Controller
         }
         $artikel->save();
 
-        Alert::success('Success', 'artikel Berhasil Disimpan');
+        Alert::success('Success', 'Artikel Berhasil Disimpan');
         return redirect('/admin/artikel')->with('sukses', 'Data Berhasil Dibuat');
     }
 
@@ -53,7 +54,7 @@ class ArtikelController extends Controller
 
         $artikel->delete();
         
-        Alert::error('Delete', 'artikel Sukses Dihapus');
+        Alert::error('Delete', 'Artikel Sukses Dihapus');
         return redirect('/admin/artikel');
     }
 
@@ -72,6 +73,13 @@ class ArtikelController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $this->validate($request, [
+            'judul_artikel' => ['required', 'string', 'max:100'],
+            'deskripsi_artikel' => ['required'],
+            'foto_artikel' => ['required', 'mimes:jpg,jpeg,png'],
+        ]);
+        
         $ubah = artikel::findorfail($id);
         $awal = $ubah->foto_artikel;
 
@@ -84,7 +92,7 @@ class ArtikelController extends Controller
         $request->foto_artikel->move(public_path().'/foto_artikel', $awal);
         $ubah->update($artikels);
 
-        Alert::success('Success', 'artikel Berhasil Dirubah');
+        Alert::success('Success', 'Artikel Berhasil Dirubah');
         return redirect('/admin/artikel');
     }
 }

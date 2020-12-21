@@ -36,6 +36,7 @@ class PetaniProdukController extends Controller
             'harga' => ['required', 'integer'],
             'stok' => ['required', 'integer'],
             'deskripsi' => ['required'],
+            'gambar' => ['required', 'mimes:jpg,jpeg,png'],
         ]);
         //insert ke tabel user
         $produk = new \App\produk;
@@ -79,6 +80,14 @@ class PetaniProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'nama_barang' => ['required', 'string', 'max:100'],
+            'harga' => ['required', 'integer'],
+            'stok' => ['required', 'integer'],
+            'deskripsi' => ['required'],
+            'gambar' => ['required', 'mimes:jpg,jpeg,png'],
+        ]);
+        
         $ubah = Produk::findorfail($id);
         $awal = $ubah->gambar;
 

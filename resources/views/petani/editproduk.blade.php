@@ -14,25 +14,51 @@
 
                         <div class="form-group">
                             <label for="">Nama Produk</label>
-                            <input type="text" name="nama_barang" id="nama_barang" class="form-control" value="{{ $produks->nama_barang }}">
+                            <input type="text" name="nama_barang" id="nama_barang" class="form-control @error('nama_barang') is-invalid @enderror" value="{{ $produks->nama_barang }}" autocomplete="nama_barang" autofocus>
+                            @error('nama_barang')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Harga Produk</label>
-                            <input type="number" name="harga" id="harga" class="form-control" value="{{ $produks->harga }}">
+                            <input type="number" name="harga" id="harga" class="form-control @error('harga') is-invalid @enderror" value="{{ $produks->harga }}" autocomplete="harga" autofocus>
+                            @error('harga')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="">Stok Produk</label>
-                            <input type="number" name="stok" id="stok" class="form-control" value="{{ $produks->stok }}">
+                            <input type="number" name="stok" id="stok" class="form-control @error('stok') is-invalid @enderror" value="{{ $produks->stok }}" autocomplete="stok" autofocus>
+                            @error('stok')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="">Deskripsi Produk</label>
-                            <textarea type="text" name="deskripsi" id="deskripsi" class="form-control" cols="83" rows="5" >{{ $produks->deskripsi }}</textarea>
+                            <textarea type="text" name="deskripsi" id="deskripsi"  cols="83" rows="5" class="form-control @error('deskripsi') is-invalid @enderror"autocomplete="deskripsi" autofocus>{{ $produks->deskripsi }}</textarea>
+                            @error('deskripsi')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
-                            <input id="gambar" type="file" name="gambar">
+                            <label for="">Foto Produk</label>
+                            <input id="gambar" type="file" class="form-control @error('gambar') is-invalid @enderror" name="gambar" value="{{ url('gambar') }}/{{ $produks->gambar }}" autocomplete="gambar" autofocus>
+                            @error('gambar')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <img src="{{ url('gambar') }}/{{ $produks->gambar }}" width="50%" alt="">
@@ -50,7 +76,7 @@
 </div>
 </body>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     function validateForm() {
         var a = document.forms["form"]["nama_barang"].value;
         var b = document.forms["form"]["harga"].value;
@@ -63,6 +89,6 @@
             return false;
         }
     }
-</script>
+</script> -->
 
 @endsection

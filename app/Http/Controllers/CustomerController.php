@@ -24,6 +24,15 @@ class CustomerController extends Controller
 
     public function updateprofile(Request $request, $id)
     {
+        $this->validate($request, [
+            'nama' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255'],
+            'alamat' => ['required', 'string', 'max:255'],
+            'no_hp' => ['required', 'min:11', 'max:13'],
+            'tanggal_lahir' => ['required'],
+            'foto' => ['required', 'mimes:jpg,jpeg,png'],
+        ]);
+
         $user = \Auth::user()->id;
         if ($request->hasFile('foto')) {
             $request->file('foto')->move('foto/', $request->file('foto')->getClientOriginalName());
@@ -50,7 +59,7 @@ class CustomerController extends Controller
                     "alamat" => $request->alamat,
                 ]);
         }
-        return redirect(url('/customer/{{auth()->user()->customer->id}}/profile'))->with('success', 'data berhasil diubah');
+        return redirect(url('/customer/{{auth()->user()->customer->id}}/profile'))->with('success', 'Data Berhasil Diubah');
     }
 
     public function artikel()

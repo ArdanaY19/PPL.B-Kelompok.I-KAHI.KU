@@ -25,11 +25,14 @@ class PageController extends Controller
     public function postregistercustomer(Request $request)
     {
         $this->validate($request, [
-            'username' => ['required', 'string', 'max:15'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
-            'alamat' => ['required', 'string'],
-            'no_hp' => ['required'],
+            'nama' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
+            'email' => ['required', 'string', 'email:rfc,dns', 'max:30', 'unique:users'],
+            'alamat' => ['required', 'string', 'max:255'],
+            'no_hp' => ['required', 'min:11', 'max:13'],
+            'tanggal_lahir' => ['required'],
+            'foto' => ['required', 'mimes:jpg,jpeg,png'],
         ]);
         //insert ke tabel user
         $user = new \App\User;
@@ -53,11 +56,14 @@ class PageController extends Controller
     public function postregisterpetani(Request $request)
     { {
             $this->validate($request, [
-                'username' => ['required', 'string', 'max:15'],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
-                'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
-                'alamat' => ['required', 'string', 'max:32'],
-                'no_hp' => ['required'],
+                'nama' => ['required', 'string', 'max:255'],
+                'username' => ['required', 'string', 'max:255'],
+                'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
+                'email' => ['required', 'string', 'email:rfc,dns', 'max:30', 'unique:users'],
+                'alamat' => ['required', 'string', 'max:255'],
+                'no_hp' => ['required', 'min:11', 'max:13'],
+                'tanggal_lahir' => ['required'],
+                'foto' => ['required', 'mimes:jpg,jpeg,png'],
             ]);
             //insert ke tabel user
             $user = new \App\User;

@@ -122,6 +122,7 @@ class ProdukController extends Controller
         $transaksi = Transaksi::where('user_id', Auth::user()->id)->where('status', 0)->first();
         $transaksi_id = $transaksi->id;
         $transaksi->status = 1;
+        $transaksi->ongkir = 17000;
         $transaksi->update();
 
         $transaksi_details = TransaksiDetail::where('transaksi_id', $transaksi_id)->get();
@@ -155,7 +156,7 @@ class ProdukController extends Controller
     public function bukti(Request $request, $id)
     {
         $validation = $request->validate([
-            'bukti_transfer' => ['required', 'mimes:jpg,jpeg,png,bmp,tiff'],
+            'bukti_transfer' => ['required', 'mimes:jpg,jpeg,png'],
         ]);
 
         // if($validation->fails()){
